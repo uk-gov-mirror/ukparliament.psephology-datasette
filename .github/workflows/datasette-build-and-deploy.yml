@@ -71,4 +71,4 @@ jobs:
       run: >
         datasette publish heroku psephology.db
         --metadata metadata.json
-        --name psephology-datasette
+        --name psephology-datasette-part-deux
