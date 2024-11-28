@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-      # with:
-      #   ref: main # Ensures we check out the main branch
+      with:
+        ref: main # Ensures we check out the main branch
 
     - name: rename-old-db
       run: mv psephology.db psephology.backup.db
