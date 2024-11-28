@@ -1,0 +1,22 @@
+name: Datasette Test - database dump and process
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Run every Thursday at 8:30
+    - cron:  '30 8 * * 4'
+
+permissions:
+  contents: write
+
+jobs:
+  scheduled:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: main # Ensures we check out the main branch
