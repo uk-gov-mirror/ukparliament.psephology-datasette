@@ -22,7 +22,7 @@ jobs:
         ref: main # Ensures we check out the main branch
 
     - name: rename-old-db
-      run: mv mpsephology.db psephology.backup.db
+      run: mv psephology.db psephology.backup.db
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -36,10 +36,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install db-to-sqlite psycopg2-binary datasette
 
-    # - name: Install Python dependencies
-    #   run: |
-    #     python -m pip install --upgrade pip
-    #     pip install -r requirements.txt
     - name: Get SQLite dump from Heroku DB
       env:
         DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
