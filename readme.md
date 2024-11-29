@@ -1,14 +1,16 @@
 # Psephology Datasette
 
-This repo looks after the set up and hosting of a database instance for the Psephology database
+This repo looks after the set up and hosting of a [Datasette](https://datasette.io/) instance for the Psephology database. Datasette is a nice front end for browsing data sets.
 
 ## Run locally with metadata:
 
-```datasette psephology.db --metadata metadata.json```
+ * Get Python up and running
+ * Install dependencies
+ * Run datasette - ```datasette psephology.db --metadata metadata.json```
 
 ## GitHub action
 
-A github action runs on a schedule, publishing the datasette with the latest copy of the database. This also runs on a push or a branch push.
+A [github action](.github/workflows/datasette-build-and-deploy.yml) runs on a schedule, publishing the datasette with the latest copy of the database. This also runs on a push or a branch push.
 
 ### What the action does
 
@@ -23,8 +25,8 @@ A github action runs on a schedule, publishing the datasette with the latest cop
 
  ### notes on the GH action
 
- * `datasette publish` is hardcoded to deploy using Python 3.11 rather than whatever is set in the repo. This confuses matters
- * The action checks out the `main` branch, not a different one if you are working on a different one. Bear this in mind if doing PRs!
+ * `datasette publish` is hardcoded to deploy using Python 3.11 rather than whatever is set in the repo. This confuses matters!
+ * The action checks out the `main` branch, not a different one if you are working on a different one. Bear this in mind if doing PRs! If you don't specify a branch to check out, you ended up with a detached head state, no fun for anyone.
 
 ## Local publishing to Heroku:
 

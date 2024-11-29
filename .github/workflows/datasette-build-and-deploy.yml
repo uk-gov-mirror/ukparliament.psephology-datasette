@@ -1,4 +1,4 @@
-name: Datasette - database dump and process
+name: Datasette - database dump and Heroku deployment
 
 on:
   push:
@@ -21,22 +21,22 @@ jobs:
       with:
         ref: main # Ensures we check out the main branch
 
-    - name: rename-old-db
+    - name: Rename old database file to avoid the new one being appended
       run: mv psephology.db psephology.backup.db
 
-    - name: Set up Python
+    - name: Set up Python for Datasette
       uses: actions/setup-python@v5
       with:
         python-version: 3.12.4
 
     # Need to do this else sometimes db-to-sqlite conks out
     # complaining about the psycopg2 missing
-    - name: Install dependencies
+    - name: Install python dependencies
       run: |
         python -m pip install --upgrade pip
         pip install db-to-sqlite psycopg2-binary datasette
 
-    - name: Get SQLite dump from Heroku DB
+    - name: Get SQLite dump from Heroku DB using db-to-sqlite
       env:
         DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
       run: >
@@ -45,7 +45,7 @@ jobs:
         --skip=ar_internal_metadata
         --skip=schema_migrations
 
-    - name: Commit updated DB to repo
+    - name: Commit updated DB to this repo
       run: |
         touch deploys/`date +"%Y-%m-%dT%H:%M:%S%z"`
         git config --global user.name 'GitHub Action'
@@ -65,7 +65,7 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku plugins:install heroku-builds
 
-    - name: Deploy
+    - name: Deploy using datasette publish to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: >
