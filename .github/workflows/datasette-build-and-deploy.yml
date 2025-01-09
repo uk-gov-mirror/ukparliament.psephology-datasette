@@ -59,8 +59,8 @@ jobs:
     # https://github.com/actions/runner-images/issues/10786#issuecomment-2416287770
     # https://devcenter.heroku.com/articles/heroku-cli#standalone-installation-with-a-tarball
     - name: Install Heroku CLI
-       run: |
-         curl https://cli-assets.heroku.com/install.sh | sh
+      run: |
+        curl https://cli-assets.heroku.com/install.sh | sh
 
     - name: Login to Heroku
       env:
