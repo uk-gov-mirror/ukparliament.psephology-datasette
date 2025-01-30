@@ -22,8 +22,8 @@ jobs:
       with:
         ref: main # Ensures we check out the main branch
 
-    - name: Rename old database file to avoid the new one being appended
-      run: mv psephology.db psephology.backup.db
+    - name: Remove old database file to avoid the new one being appended
+      run: rm psephology.db
 
     - name: Set up Python for Datasette
       uses: actions/setup-python@v5
