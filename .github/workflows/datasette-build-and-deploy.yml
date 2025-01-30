@@ -79,3 +79,12 @@ jobs:
         datasette publish heroku psephology.db
         --metadata metadata.json
         --name psephology-datasette
+
+     - name: Deploy using datasette publish to Heroku
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: >
+        git push heroku main
+        # datasette publish heroku psephology.db
+        # --metadata metadata.json
+        # --name psephology-datasette
