@@ -1,14 +1,15 @@
+---
 name: Datasette - database dump and Heroku deployment
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
     # * is a special character in YAML so you have to quote this string
     # Run every Thursday at 8:30
-    - cron:  '30 8 * * 4'
+    - cron: '30 8 * * 4'
 
 permissions:
   contents: write
@@ -80,7 +81,7 @@ jobs:
         --metadata metadata.json
         --name psephology-datasette
 
-     - name: Deploy using datasette publish to Heroku
+    - name: Deploy using datasette publish to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: >
