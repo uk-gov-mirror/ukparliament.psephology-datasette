@@ -51,7 +51,7 @@ jobs:
         touch deploys/`date +"%Y-%m-%dT%H:%M:%S%z"`
         git config --global user.name 'GitHub Action'
         git config --global user.email 'psephology-datasette-action@users.noreply.github.com'
-        git add remote heroku https://git.heroku.com/psephology-datasette.git
+        git remote add heroku https://git.heroku.com/psephology-datasette.git
         git add psephology.db
         git add deploys
         git commit -m "Updated database"
