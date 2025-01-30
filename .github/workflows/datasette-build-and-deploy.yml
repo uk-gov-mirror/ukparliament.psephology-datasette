@@ -55,7 +55,7 @@ jobs:
         git add psephology.db
         git add deploys
         git commit -m "Updated database"
-        git push
+        git push --force
 
     # Ubuntu image used to include heroku CLI, but not in 24.04
     # https://github.com/actions/runner-images/issues/10786#issuecomment-2416287770
