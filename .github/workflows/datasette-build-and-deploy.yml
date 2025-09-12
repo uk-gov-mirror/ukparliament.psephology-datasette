@@ -34,7 +34,8 @@ jobs:
     - name: Install python dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install db-to-sqlite psycopg2-binary datasette
+        pip install db-to-sqlite psycopg2-binary 
+        pip install git+https://github.com/jamesjefferies/datasette@temporary-branch-for-release
 
     - name: Get SQLite dump from Heroku DB using db-to-sqlite
       env:
